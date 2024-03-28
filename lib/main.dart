@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
+        // the application has a redAccent toolbar. Then, without quitting the app,
         // try changing the seedColor in the colorScheme below to Colors.green
         // and then invoke "hot reload" (save your changes or press the "hot
         // reload" button in a Flutter-supported IDE, or press "r" if you used
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -117,10 +118,55 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        // shape: RoundedRectangleBorder(
+        //   side: const BorderSide(
+        //     color: Colors.white,
+        //     width: 1.0,
+        //     style: BorderStyle.solid,
+        //   ),
+        //   borderRadius: BorderRadius.circular(30),
+        // ),
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        tooltip: 'Refresh',
         child: const Icon(Icons.refresh_rounded),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+        child: NavigationBar(
+          
+          
+          // indicatorShape: const CircleBorder(),
+          
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          // indicatorColor: Colors.amber,
+          selectedIndex: currentPageIndex,
+          destinations: const <Widget>[
+            NavigationDestination(
+              selectedIcon: Icon(Icons.home_rounded),
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
+            ),
+            // NavigationDestination(
+            //   icon: Badge(child: Icon(Icons.notifications_sharp)),
+            //   label: 'Notifications',
+            // ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.bookmark_rounded),
+              icon: Badge(
+                label: Text('2'),
+                child: Icon(Icons.bookmark_border_rounded),
+              ),
+              label: 'Messages',
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
