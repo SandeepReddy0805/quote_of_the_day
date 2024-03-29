@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,9 +56,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _counter = 1;
   int currentPageIndex = 0;
-  
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      _counter <<= 1;
     });
   }
 
@@ -78,95 +78,93 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'quote of the day: "Hello, World!"',
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        return Scaffold(
+          appBar: AppBar(
+            // TRY THIS: Try changing the color here to a specific color (to
+            // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+            // change color while the other colors stay the same.
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            // Here we take the value from the MyHomePage object that was created by
+            // the App.build method, and use it to set our appbar title.
+            title: Text(widget.title),
+          ),
+          body: Center(
+            // Center is a layout widget. It takes a single child and positions it
+            // in the middle of the parent.
+            child: Column(
+              // Column is also a layout widget. It takes a list of children and
+              // arranges them vertically. By default, it sizes itself to fit its
+              // children horizontally, and tries to be as tall as its parent.
+              //
+              // Column has various properties to control how it sizes itself and
+              // how it positions its children. Here we use mainAxisAlignment to
+              // center the children vertically; the main axis here is the vertical
+              // axis because Columns are vertical (the cross axis would be
+              // horizontal).
+              //
+              // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+              // action in the IDE, or press "p" in the console), to see the
+              // wireframe for each widget.
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'quote of the day: "Hello, World!"',
+                ),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          floatingActionButton: FloatingActionButton(
+            // label: Text('$_counter'), // for Extended FAB
+            backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+            foregroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
+            onPressed: _incrementCounter,
+            tooltip: 'Refresh',
+            // icon: const Icon(Icons.refresh_rounded), // for Extended FAB
+            child: const Icon(Icons.refresh_rounded),
+          ), // This trailing comma makes auto-formatting nicer for build methods.
+          bottomNavigationBar: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15.0)),
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        // shape: RoundedRectangleBorder(
-        //   side: const BorderSide(
-        //     color: Colors.white,
-        //     width: 1.0,
-        //     style: BorderStyle.solid,
-        //   ),
-        //   borderRadius: BorderRadius.circular(30),
-        // ),
-        onPressed: _incrementCounter,
-        tooltip: 'Refresh',
-        child: const Icon(Icons.refresh_rounded),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-      ),
-        child: NavigationBar(
-          
-          
-          // indicatorShape: const CircleBorder(),
-          
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          // indicatorColor: Colors.amber,
-          selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              selectedIcon: Icon(Icons.home_rounded),
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
+            child: NavigationBar(
+              // indicatorShape: const CircleBorder(),
+
+              onDestinationSelected: (int index) {
+                setState(() {
+                  currentPageIndex = index;
+                });
+              },
+              // indicatorColor: Colors.amber,
+              selectedIndex: currentPageIndex,
+              destinations: const <Widget>[
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.home_rounded),
+                  icon: Icon(Icons.home_outlined),
+                  label: 'Home',
+                ),
+                // NavigationDestination(
+                //   icon: Badge(child: Icon(Icons.notifications_sharp)),
+                //   label: 'Notifications',
+                // ),
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.bookmark_rounded),
+                  icon: Badge(
+                    label: Text('2'),
+                    child: Icon(Icons.bookmark_border_rounded),
+                  ),
+                  label: 'Messages',
+                ),
+              ],
             ),
-            // NavigationDestination(
-            //   icon: Badge(child: Icon(Icons.notifications_sharp)),
-            //   label: 'Notifications',
-            // ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.bookmark_rounded),
-              icon: Badge(
-                label: Text('2'),
-                child: Icon(Icons.bookmark_border_rounded),
-              ),
-              label: 'Messages',
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
