@@ -154,10 +154,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 // ),
                 NavigationDestination(
                   selectedIcon: Icon(Icons.bookmark_rounded),
-                  icon: Badge(
-                    label: Text('2'),
-                    child: Icon(Icons.bookmark_border_rounded),
-                  ),
+                  icon: Icon(Icons.bookmark_border_rounded),
+                  // icon: Badge(
+                  //   label: Text('2'),
+                  //   child: Icon(Icons.bookmark_border_rounded),
+                  // ),
                   label: 'Messages',
                 ),
               ],
