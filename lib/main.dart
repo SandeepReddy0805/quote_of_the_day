@@ -58,6 +58,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 1;
   int currentPageIndex = 0;
+  bool? saveSelected = false;
 
   void _incrementCounter() {
     setState(() {
@@ -125,9 +126,21 @@ class _MyHomePageState extends State<MyHomePage> {
                         label: const Text('Share'),
                       ),
                       IconButton.filledTonal(
+                        isSelected: saveSelected,
+                        onPressed: () {
+                          setState(() {
+                            saveSelected = !saveSelected!;
+                          });
+                        },
+                        icon: const Icon(Icons.bookmark_border_rounded),
+                        selectedIcon: const Icon(Icons.bookmark_outlined),
+                      ),
+                      IconButton.filledTonal(
+                        isSelected: saveSelected,
                         onPressed: () {
                           // implemet
                         },
+                        selectedIcon: const Icon(Icons.bookmark_outlined),
                         icon: const Icon(Icons.bookmark_border_rounded),
                       ),
                       IconButton.filledTonal(
