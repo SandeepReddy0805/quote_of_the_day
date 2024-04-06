@@ -1,34 +1,21 @@
 import 'package:flutter/material.dart';
-// import 'package:dynamic_color/dynamic_color.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget { 
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // This widget is the root of my application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a redAccent toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+        // This is the theme of my application.
+        // textTheme: GoogleFonts.bungeeSpiceTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
       ),
@@ -40,14 +27,9 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
+  // This widget is the home page of my application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -59,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 1;
   int currentPageIndex = 0;
   bool? saveSelected = false;
+  int modifier = 1;
 
   void _incrementCounter() {
     setState(() {
@@ -67,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter <<= 1;
+      _counter += modifier;
     });
   }
 
@@ -108,14 +91,30 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Card.outlined(
+            Card.filled(
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
+              // EdgeInsetGeometry: const EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
                   const ListTile(
-                    leading: Icon(Icons.album),
-                    title: Text('Idhi Music kadhu marustha lee...'),
-                    subtitle:
-                        Text('Actually ikkada Quote inka, Author ravali pedtha...'),
+                    // No leading widget, so the title is centered.
+                    // leading: Icon(Icons.album),
+                    title: Text(
+                      'The greatest glory in living lies not in never falling, but in rising every time we fall.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: "JetBrainsMono",
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    subtitle: Text(
+                      '\n- Nelson Mandela',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
                   ),
                   ButtonBar(
                     alignment: MainAxisAlignment.start,
@@ -130,6 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
                           setState(() {
                             saveSelected = !saveSelected!;
+                            modifier = saveSelected! ? 1 : -1;
                           });
                         },
                         icon: const Icon(Icons.bookmark_border_rounded),
@@ -138,13 +138,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       IconButton.filledTonal(
                         isSelected: saveSelected,
                         onPressed: () {
-                          // implemet
+                          setState(() {
+                            saveSelected = !saveSelected!;
+                            modifier = saveSelected! ? 1 : -1;
+                          });
                         },
-                        selectedIcon: const Icon(Icons.bookmark_outlined),
-                        icon: const Icon(Icons.bookmark_border_rounded),
-                      ),
-                      IconButton.filledTonal(
-                        onPressed: () {},
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            const CircleBorder(),
+                          ),
+                        ),
+                        selectedIcon: const Icon(Icons.favorite_rounded),
                         icon: const Icon(Icons.favorite_border_rounded),
                       )
                     ],
