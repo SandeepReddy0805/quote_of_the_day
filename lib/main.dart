@@ -5,7 +5,7 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget { 
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of my application.
@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of my application.
         // textTheme: GoogleFonts.bungeeSpiceTextTheme(),
@@ -97,23 +98,26 @@ class _MyHomePageState extends State<MyHomePage> {
               // EdgeInsetGeometry: const EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
-                  const ListTile(
+                  ListTile(
                     // No leading widget, so the title is centered.
                     // leading: Icon(Icons.album),
                     title: Text(
                       'The greatest glory in living lies not in never falling, but in rising every time we fall.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontFamily: "JetBrainsMono",
-                        fontSize: 40.0,
+                        fontFamily: GoogleFonts.jetBrainsMono().fontFamily,
+                        fontSize: 30.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
+                      // style: GoogleFonts.jetBrainsMono().fon,
                     ),
                     subtitle: Text(
                       '\n- Nelson Mandela',
                       textAlign: TextAlign.right,
-                      style: TextStyle(fontStyle: FontStyle.italic),
+                      style: TextStyle(
+                          fontFamily: GoogleFonts.jetBrainsMono().fontFamily,
+                          fontStyle: FontStyle.italic),
                     ),
                   ),
                   ButtonBar(
@@ -156,13 +160,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            const Text(
-              'quote of the day: "Hello, World!"',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            // const Text(
+            //   'quote of the day: "Hello, World!"',
+            // ),
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headlineMedium,
+            // ),
           ],
         ),
       ),
