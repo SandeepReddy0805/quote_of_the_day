@@ -39,7 +39,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 1;
+  // int _counter = 1;
   int currentPageIndex = 0;
   bool? saveSelected = false;
   int modifier = 1;
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter += modifier;
+      // _counter += modifier;
     });
   }
 
@@ -64,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      // backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
@@ -105,12 +106,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       'The greatest glory in living lies not in never falling, but in rising every time we fall.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontFamily: GoogleFonts.jetBrainsMono().fontFamily,
+                        fontFamily: GoogleFonts.jetBrainsMono(
+                          fontWeight: FontWeight.bold,
+                        ).fontFamily,
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
-                      // style: GoogleFonts.jetBrainsMono().fon,
                     ),
                     subtitle: Text(
                       '\n- Nelson Mandela',
@@ -121,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   ButtonBar(
-                    alignment: MainAxisAlignment.start,
+                    alignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       FilledButton.icon(
                         onPressed: () {},
@@ -129,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         label: const Text('Share'),
                       ),
                       IconButton.filledTonal(
+                        tooltip: 'Save',
                         isSelected: saveSelected,
                         onPressed: () {
                           setState(() {
@@ -139,22 +142,22 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: const Icon(Icons.bookmark_border_rounded),
                         selectedIcon: const Icon(Icons.bookmark_outlined),
                       ),
-                      IconButton.filledTonal(
-                        isSelected: saveSelected,
-                        onPressed: () {
-                          setState(() {
-                            saveSelected = !saveSelected!;
-                            modifier = saveSelected! ? 1 : -1;
-                          });
-                        },
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            const CircleBorder(),
-                          ),
-                        ),
-                        selectedIcon: const Icon(Icons.favorite_rounded),
-                        icon: const Icon(Icons.favorite_border_rounded),
-                      )
+                      // IconButton.filledTonal(
+                      //   isSelected: saveSelected,
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       saveSelected = !saveSelected!;
+                      //       modifier = saveSelected! ? 1 : -1;
+                      //     });
+                      //   },
+                      //   style: ButtonStyle(
+                      //     shape: MaterialStateProperty.all(
+                      //       const CircleBorder(),
+                      //     ),
+                      //   ),
+                      //   selectedIcon: const Icon(Icons.favorite_rounded),
+                      //   icon: const Icon(Icons.favorite_border_rounded),
+                      // )
                     ],
                   ),
                 ],
